@@ -7,8 +7,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import(/* webpackChunkName: "about" */ './views/Activities.vue')
+      redirect: 'activities'
+    },
+    {
+      path: '/activities',
+      name: 'activities',
+      component: () => import(/* webpackChunkName: "activities" */ './views/Activities.vue')
     }
   ]
 })
