@@ -20,13 +20,50 @@
                   </b-form-checkbox>
               </b-col>
             </b-row>
-            <b-row class="mt-3">
-                <b-col>
-                    <b-button variant="primary" type="submit">Submit</b-button>
-                </b-col>
-            </b-row>
-        </b-form>
-    </div>
+
+            <b-row>
+              <b-col>
+                <b-button
+                    class="mt-3"
+                    type="submit"
+                    variant="primary"
+                    block
+                >
+                    Enviar
+                </b-button>
+              </b-col>
+              <b-col>
+                <b-button
+                    class="mt-3 text-white"
+                    variant="warning"
+                    block
+                    @click="clearErrors"
+                >
+                    Limpiar errores
+                </b-button>
+              </b-col>
+              <b-col>
+                <b-button
+                    class="mt-3 text-white"
+                    block
+                    variant="info"
+                    @click="clearForm"
+                >
+                    Limpiar formulario
+                </b-button>
+              </b-col>
+              <b-col>
+                <b-button
+                    class="mt-3 text-white"
+                    block
+                    @click="clearFormAndErrors"
+                >
+                    Limpiar formulario y errores
+                </b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+  </div>
 </template>
 
 <script>
@@ -96,6 +133,17 @@ export default {
           if(!validate) {
             return false
           }
+        },
+        clearForm () {
+          Object.assign(this.$data, this.$options.data.apply(this))
+        },
+        clearErrors () {
+          this.reset = true
+          this.$validator.reset()
+        },
+        clearFormAndErrors () {
+          this.clearForm()
+          this.clearErrors()
         }
     }
 }
