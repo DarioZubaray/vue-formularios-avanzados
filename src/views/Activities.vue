@@ -7,7 +7,20 @@
                 :is="activityComponent"
                 :activity_selected_data="activity.activity_selected_data"
             ></component>
-            <b-row>
+            <b-row class="mt-3">
+              <b-col>
+                  <b-form-checkbox
+                      name="terms"
+                      v-model="activity.terms"
+                      v-validate="'required'"
+                      :state="activity.terms ? 'valid' : (reset ? null : 'invalid')"
+                      :unchecked-value="false"
+                  >
+                      Acepto los términos de uso
+                  </b-form-checkbox>
+              </b-col>
+            </b-row>
+            <b-row class="mt-3">
                 <b-col>
                     <b-button variant="primary" type="submit">Submit</b-button>
                 </b-col>
@@ -75,7 +88,14 @@ export default {
     },
     methods: {
         async submitActivity() {
-            const validate = await this.$validator.validateAll()
+          this.reset = false
+          if(!this.activity.terms) {
+            return false
+          }
+          const validate = await this.$validator.validateAll()
+          if(!validate) {
+            return false
+          }
         }
     }
 }
