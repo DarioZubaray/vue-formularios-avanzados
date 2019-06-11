@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5">
+    <div class="mt-1">
         <b-form @submit.prevent="submitActivity" class="mb-5">
             <activity-personal-data :personal_data="activity.personal_data"></activity-personal-data>
             <activity-type-selection :activity_type_selection="activity.activity_type_selection"></activity-type-selection>
@@ -132,6 +132,17 @@ export default {
           const validate = await this.$validator.validateAll()
           if(!validate) {
             return false
+          }
+
+          try {
+            this.axios({
+              method: 'POST',
+              url: '/activities_subscriptions',
+              data: this.activity
+            })
+            this.clearFormAndErrors()
+          } catch (e) {
+            console.log(e)
           }
         },
         clearForm () {
