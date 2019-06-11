@@ -2,6 +2,7 @@
     <div class="mt-5">
         <b-form @submit.prevent="submitActivity" class="mb-5">
             <activity-personal-data :personal_data="activity.personal_data"></activity-personal-data>
+            <activity-type-selection :activity_type_selection="activity.activity_type_selection"></activity-type-selection>
             <b-row>
                 <b-col>
                     <b-button variant="primary" type="submit">Submit</b-button>
@@ -13,6 +14,7 @@
 
 <script>
 import ActivityPersonalData from '../components/ActivityForm/ActivityPersonalData'
+import ActivityTypeSelection from '../components/ActivityForm/ActivityTypeSelection'
 import validationMixin from '../mixins/validation'
 
 export default {
@@ -20,7 +22,7 @@ export default {
         validationMixin
     ],
     components: {
-        ActivityPersonalData
+        ActivityPersonalData, ActivityTypeSelection
     },
     data() {
         return {
