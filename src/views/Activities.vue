@@ -123,6 +123,13 @@ export default {
         }
       }
     },
+    async mounted() {
+      const {data} = await this.axios({
+        method: 'GET',
+        url: 'activities_subscriptions/1'
+      })
+      this.activity = data
+    },
     methods: {
         async submitActivity() {
           this.reset = false
